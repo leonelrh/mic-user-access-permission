@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "25ffb4b0-9f84-48d0-98b6-42b9b664eb4b",
+		"name": "Usuario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "595602"
+	},
+	"item": [
+		{
+			"name": "Registro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"wilmerleonel\",\n    \"email\": \"wilmerleonell@dominio.cl\",\n    \"password\": \"leonel12345\",\n    \"phones\": [\n        {\n            \"number\": \"1234567\",\n            \"citycode\": \"1\",\n            \"contrycode\": \"57\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"wilmerleonel@dominio.cl\",\n    \"password\": \"leonel12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3aWxtZXJsZW9uZWxAZG9taW5pby5jbCIsImlhdCI6MTcwMTE0ODUwNiwiZXhwIjoxNzAxMTUyMTA2fQ.pWJ8PB7t4L5RASOjWjG3r1XPHqJotslSyLTYJEl5WWU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3aWxtZXJsZW9uZWxAZG9taW5pby5jbCIsImlhdCI6MTcwMTE0ODUwNiwiZXhwIjoxNzAxMTUyMTA2fQ.pWJ8PB7t4L5RASOjWjG3r1XPHqJotslSyLTYJEl5WWU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/user/1f06311e-a9a5-456a-ab3b-1c466877705a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"user",
+						"1f06311e-a9a5-456a-ab3b-1c466877705a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZW9udXVra2loakBkb21pbmlvLmNsIiwiaWF0IjoxNzAxMTQ0NjEwLCJleHAiOjE3MDExNDgyMTB9.qU7EU3DWINhiiE20ANaaRCAWhFPSreSmkQS7AFM1q74",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"wilmerleytytyttggg\",\n    \"email\": \"leonuukkihj@dominio.cl\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/user/80bb3c85-9db5-4b3b-b381-5a5e8f7928aa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"user",
+						"80bb3c85-9db5-4b3b-b381-5a5e8f7928aa"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

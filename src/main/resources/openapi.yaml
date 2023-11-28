@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: Users
+  version: 1.0.0
+  description: |-
+    Gestion de usuario
+servers:
+  - url: http://localhost:8080/
+tags:
+  - name: user
+    description: Operacion del usuario
+paths:
+  /auth/signup:
+    post:
+      tags:
+        - user
+      summary: Registra un usuario
+      description: Registro
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: wilmerleonel
+                email:
+                  type: string
+                  format: email
+                  example: wilmerleonel@dominio.cl
+                password:
+                  type: string
+                  example: leonel12345
+                phones:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      number:
+                        type: string
+                        example: 1234567
+                      citycode:
+                        type: string
+                        example: 1
+                      contrycode:
+                        type: string
+                        example: 57
+                    required:
+                      - number
+                      - citycode
+                      - contrycode
+              required:
+                - name
+                - email
+                - password
+                - phones
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    example: 32a39c7c-c478-4e21-89e9-82281c9fa75e
+                  name:
+                    type: string
+                    example: wilmerleonel
+                  email:
+                    type: string
+                    format: email
+                    example: wilmerleonell@dominio.cl
+                  password:
+                    type: string
+                    example: $2a$10$WwqXk0FZwksGbzaTPgooLOtbj5JRB7y4XQjMXTsNEXUmd62lMsidy
+                  created:
+                    type: string
+                    format: date-time
+                    example: '2023-11-28T05:28:22.867+00:00'
+                  modified:
+                    type: string
+                    format: date-time
+                    example: '2023-11-28T05:28:22.867+00:00'
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3aWxtZXJsZW9uZWxsQGRvbWluaW8uY2wiLCJpYXQiOjE3MDExNDkzMDMsImV4cCI6MTcwMTE1MjkwM30.MAJxhbMmywQuT8SJe7_EZA4DutC-ylGUdoK1031FR4I
+                  lastLogin:
+                    type: string
+                    format: date-time
+                    example: null
+                  isActive:
+                    type: boolean
+                    example: true
+                required:
+                  - id
+                  - name
+                  - email
+                  - password
+                  - created
+                  - modified
+                  - token
+                  - isActive
+  /auth/login:
+    post:
+      tags:
+        - user
+      summary: Login de usuario
+      description: ''
+      operationId: loginUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: wilmerleonel@dominio.cl
+                password:
+                  type: string
+                  example: leonel12345
+              required:
+                - email
+                - password
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3aWxtZXJsZW9uZWxAZG9taW5pby5jbCIsImlhdCI6MTcwMTE0ODUwNiwiZXhwIjoxNzAxMTUyMTA2fQ.pWJ8PB7t4L5RASOjWjG3r1XPHqJotslSyLTYJEl5WWU"
+                  expiresIn:
+                    type: integer
+                    example: 3600000
+                required:
+                  - token
+                  - expiresIn
+        '400':
+          description: Invalid username/password supplied
+  /v1/user:
+    get:
+      tags:
+        - user
+      summary: Obtiene una lista de usuarios
+      description: lista usuario
+      operationId: createUsersWithListInput
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                    email:
+                      type: string
+                      format: email
+                    password:
+                      type: string
+                    createdAt:
+                      type: string
+                      format: date-time
+                    updatedAt:
+                      type: string
+                      format: date-time
+                    enabled:
+                      type: boolean
+                    accountNonLocked:
+                      type: boolean
+                    accountNonExpired:
+                      type: boolean
+                    credentialsNonExpired:
+                      type: boolean
+                    authorities:
+                      type: array
+                      items:
+                        type: string
+                    username:
+                      type: string
+                  required:
+                    - id
+                    - name
+                    - email
+                    - password
+                    - createdAt
+                    - updatedAt
+                    - enabled
+                    - accountNonLocked
+                    - accountNonExpired
+                    - credentialsNonExpired
+                    - authorities
+                    - username
+
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: successful operation
+  /v1/user/{id}:
+    get:
+      tags:
+        - user
+      summary: Obtiene un usuario por id
+      description: ''
+      operationId: getUserByName
+      parameters:
+        - name: id
+          in: path
+          description: 'The name that needs to be fetched. Use user1 for testing. '
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  password:
+                    type: string
+                  phones:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        number:
+                          type: string
+                        cityCode:
+                          type: string
+                        countryCode:
+                          type: string
+                      required:
+                        - number
+                required:
+                  - name
+                  - email
+                  - password
+                  - phones
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+    put:
+      tags:
+        - user
+      summary: Actualiza un usuario
+      description: ''
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          description: name that need to be deleted
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+              required:
+                - name
+                - email
+      responses:
+        default:
+          description: successful operation
+components:
+  schemas:
+    User:
+      type: object
